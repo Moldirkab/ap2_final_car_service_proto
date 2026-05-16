@@ -1,0 +1,19 @@
+name: Trigger Generation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.proto'
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger ap2-generated workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/Moldirkab/ap2_final_car_generated/actions/workflows/generated.yml/dispatches \
+            -d '{"ref":"main"}'

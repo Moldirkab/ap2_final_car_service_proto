@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package car;
+
+option go_package = "github.com/Moldirkab/ap2_final_car_generated/carpb;carpb";
+
+service CarService {
+  rpc CreateCar(CreateCarRequest) returns (CarResponse);
+  rpc GetCar(GetCarRequest) returns (CarResponse);
+  rpc ListCars(ListCarsRequest) returns (ListCarsResponse);
+  rpc UpdateCar(UpdateCarRequest) returns (CarResponse);
+  rpc DeleteCar(DeleteCarRequest) returns (DeleteCarResponse);
+  rpc CheckAvailability(CheckAvailabilityRequest) returns (CheckAvailabilityResponse);
+  rpc ChangeCarStatus(ChangeCarStatusRequest) returns (CarResponse);
+}
+
+message Car {
+  int64 id = 1;
+  string brand = 2;
+  string model = 3;
+  int32 year = 4;
+  string plate_number = 5;
+  double price_per_day = 6;
+  string status = 7;
+}
+
+message CarResponse {
+  Car car = 1;
+}
+
+message CreateCarRequest {
+  string brand = 1;
+  string model = 2;
+  int32 year = 3;
+  string plate_number = 4;
+  double price_per_day = 5;
+}
+
+message GetCarRequest {
+  int64 id = 1;
+}
+
+message ListCarsRequest {
+  string brand = 1;
+  string status = 2;
+  double max_price = 3;
+}
+
+message ListCarsResponse {
+  repeated Car cars = 1;
+}
+
+message UpdateCarRequest {
+  int64 id = 1;
+  string brand = 2;
+  string model = 3;
+  int32 year = 4;
+  string plate_number = 5;
+  double price_per_day = 6;
+  string status = 7;
+}
+
+message DeleteCarRequest {
+  int64 id = 1;
+}
+
+message DeleteCarResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CheckAvailabilityRequest {
+  int64 car_id = 1;
+}
+
+message CheckAvailabilityResponse {
+  bool available = 1;
+  string status = 2;
+}
+
+message ChangeCarStatusRequest {
+  int64 car_id = 1;
+  string status = 2;
+}
