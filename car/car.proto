@@ -3,7 +3,6 @@ syntax = "proto3";
 package car;
 
 option go_package = "github.com/Moldirkab/ap2_final_car_generated/carpb;carpb";
-
 service CarService {
   rpc CreateCar(CreateCarRequest) returns (CarResponse);
   rpc GetCar(GetCarRequest) returns (CarResponse);
