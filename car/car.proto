@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package car;
+package carpb;
 
-option go_package = "github.com/Moldirkab/ap2_final_car_generated/carpb;carpb";
+option go_package = "github.com/Moldirkab/ap2_final_car_service_generated/carpb";
 
 service CarService {
   rpc CreateCar(CreateCarRequest) returns (CarResponse);
@@ -22,10 +22,25 @@ message Car {
   string plate_number = 5;
   double price_per_day = 6;
   string status = 7;
+  string photo = 8;
 }
 
 message CarResponse {
   Car car = 1;
+}
+
+message ListCarsResponse {
+  repeated Car cars = 1;
+}
+
+message DeleteCarResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CheckAvailabilityResponse {
+  bool available = 1;
+  string status = 2;
 }
 
 message CreateCarRequest {
@@ -34,6 +49,8 @@ message CreateCarRequest {
   int32 year = 3;
   string plate_number = 4;
   double price_per_day = 5;
+  string status = 6;
+  string photo = 7;
 }
 
 message GetCarRequest {
@@ -46,10 +63,6 @@ message ListCarsRequest {
   double max_price = 3;
 }
 
-message ListCarsResponse {
-  repeated Car cars = 1;
-}
-
 message UpdateCarRequest {
   int64 id = 1;
   string brand = 2;
@@ -58,24 +71,15 @@ message UpdateCarRequest {
   string plate_number = 5;
   double price_per_day = 6;
   string status = 7;
+  string photo = 8;
 }
 
 message DeleteCarRequest {
   int64 id = 1;
 }
 
-message DeleteCarResponse {
-  bool success = 1;
-  string message = 2;
-}
-
 message CheckAvailabilityRequest {
   int64 car_id = 1;
-}
-
-message CheckAvailabilityResponse {
-  bool available = 1;
-  string status = 2;
 }
 
 message ChangeCarStatusRequest {
